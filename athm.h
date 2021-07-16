@@ -1,8 +1,13 @@
 // athm.h
 
 #include <cmath>
-#include <random.h>
-#include <str.h>
+#include <ws2tcpip.h>
+#include <VersionHelpers.h>
+#include <cstring>
+#include <dirent.h>
+#include <ctime>
+#include <random>
+#include <cassert>
 
 #define mPi 3.14159265359
 #define mDoublePi mPi * 2
@@ -14,31 +19,38 @@
 		{
 			namespace athm
 			{
-				inline char controlCharToChar(char cControlChar);
-
-				inline std::string repetitionInterpretation(std::string s);
-				inline std::string reverseRepetitionInterpretation(std::string s);
-
-				struct Separator
-				{
-					std::string sDot =  "[";
-					std::string sIntCode = "]";
-					std::string sGlobalSep = "|";
-				};
-				
-				inline std::string encrypt(std::string sText, unsigned long ulKey, Separator separator);
-				inline std::string decrypt(std::string sCode, int iKey, Separator separator);
-
 				struct Dist
 				{
 					float fHorizontal;
 					float fVertical;
 				};
 
+				inline void rand_init();
+				inline void sort(auto start, auto end, auto callback);
+
 				inline Dist dda(int iPlayerY, int iPlayerX, float fAlpha, int iSqW);
 
-				inline double gravityForce(long double ldM1, long double ldM2, long double ldR) {return mG * ((ldM1 * ldM2) / pow(ldR, 2));}
+				inline std::vector<std::string> listDir(std::string sDir);
+				inline std::vector<std::string> listFolders(std::string sDir);
+				inline std::vector<std::string> listFiles(std::string sDir);
+				inline std::vector<std::string> split(std::string sString, std::string sSeparator);
 
+				inline char controlCharToChar(char cControlChar);
+
+				inline std::string getCurrentDateTime(std::string format);
+				inline std::string getWinVersion();
+				inline std::string collapseReps(std::string s);
+				inline std::string expandReps(std::string s);
+				inline std::string replace(std::string sString, std::string sSubstring, std::string sReplacement);
+
+				template <typename T>
+				inline int rand_choice(std::initializer_list<T> list, int iLen);
+				inline int rand_int(int iTo);
+				inline int rand_int(int iFrom, int iTo);
+				inline int find(auto start, auto end, auto callback);
+				inline int index(std::string sString, std::string sSubstring);
+
+				inline float rand_float() {return (float)rand_int(10000) / (float)10000;}
 				inline float getDistanceToFirstVerticalIntersection(int iPX, int iMX, float fCosAlpha, int iSqW);
 				inline float getDistanceToFirstHorizontalIntersection(int iPY, int iMY, float fSinAlpha, int iSqW);
 				inline float toRadians(float fDegree) {return fDegree * (mPi / 180);}
@@ -47,9 +59,13 @@
 				inline float getHypot(float iFromY, float iFromX, float iToY, float iToX) {return sqrt(pow(abs(iFromY - iToY), 2) + pow(abs(iFromX - iToX), 2));}
 				inline float sign(float f) {return f / abs(f);}
 
+				inline double gravityForce(long double ldM1, long double ldM2, long double ldR) {return mG * ((ldM1 * ldM2) / pow(ldR, 2));}
+
+				inline bool isFolder(std::string sPath);
+				inline bool isFile(std::string sPath) {return !isFolder(sPath);}
 				inline bool isInt(char chr);
 				inline bool isNumber(std::string str);
-				inline bool pointInside2dMatrix(int fMatrixHeight, int fMatrixWidth, float fY, float fX) {return ((fY >= 0 && fY < fMatrixHeight) && (fX >= 0 && fX < fMatrixWidth));}
+				inline bool inRange2D(int fMatrixHeight, int fMatrixWidth, float fY, float fX) {return ((fY >= 0 && fY < fMatrixHeight) && (fX >= 0 && fX < fMatrixWidth));}
 
 				#include "athm.inl"
 			};

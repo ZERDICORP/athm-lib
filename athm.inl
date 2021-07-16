@@ -1,31 +1,226 @@
 // athm.inl
 
+void rand_init()
+{
+	srand(time(NULL));
+}
+
+int rand_int(int iTo)
+{
+	return rand() % iTo * (iTo / abs(iTo));
+}
+
+int rand_int(int iFrom, int iTo)
+{
+	assert(iTo > iFrom);
+	return rand() % (iTo - iFrom + 1) + iFrom;
+}
+
+template <typename T>
+int rand_choice(std::initializer_list<T> list, int iLen)
+{
+	int iRandomIndex = rand_int(iLen);
+	int iCount = 0;
+	for (T item : list)
+	{
+		if (iCount == iRandomIndex)
+			return item;
+		iCount++;
+	}
+
+}
+
+int find(auto start, auto end, auto callback)
+{
+	for (auto ptr = start; ptr != end; ++ptr)
+		if (callback(*ptr))
+			return static_cast<int>(ptr - start);
+	return -1;
+}
+
+void sort(auto start, auto end, auto callback)
+{
+	for (auto ptr1 = start; ptr1 != end; ++ptr1)
+	{
+		for (auto ptr2 = start; ptr2 != end; ++ptr2)
+		{
+			if (callback(*ptr1, *ptr2))
+				{
+					auto temp = *ptr1;
+					*ptr1 = *ptr2;
+					*ptr2 = temp;
+				}
+		}
+	}
+}
+
+std::string getCurrentDateTime(std::string format = "%d.%m.%Y %H:%M:%S")
+{
+	time_t rawtime;
+	int iBufferSize = 100;
+	char buffer [iBufferSize];
+
+	std::time(&rawtime);
+	std::strftime(buffer, iBufferSize, format.c_str(), std::localtime(&rawtime));
+
+	return buffer;
+}
+
+bool isFolder(std::string sPath)
+{
+	DWORD attrib = GetFileAttributes(sPath.c_str());
+	if ((attrib & FILE_ATTRIBUTE_DIRECTORY) != 0)
+		return true;
+	return false;
+}
+
+std::vector<std::string> listDir(std::string sDir)
+{
+	std::vector<std::string> list;
+
+	struct dirent *entry;
+	DIR *dp;
+
+	dp = ::opendir(sDir.c_str());
+	if (dp == NULL)
+	{
+		std::cout << "[error]: path \"" << sDir << "\" not found.." << std::endl;
+		abort();
+	}
+	while ((entry = ::readdir(dp)))
+		list.push_back(entry -> d_name);
+	::closedir(dp);
+
+	delete entry;
+	delete dp;
+
+	return list;
+}
+
+std::vector<std::string> listFolders(std::string sDir)
+{
+	std::vector<std::string> list = listDir(sDir);
+	for (int i = 0; i < list.size(); ++i)
+		if (isFile(sDir + list[i]))
+		{
+			list.erase(list.begin() + i);
+			i--;
+		}
+	return list;
+}
+
+std::vector<std::string> listFiles(std::string sDir)
+{
+	std::vector<std::string> list = listDir(sDir);
+	for (int i = 0; i < list.size(); ++i)
+		if (isFolder(sDir + list[i]))
+		{
+			list.erase(list.begin() + i);
+			i--;
+		}
+	return list;
+}
+
+std::string getWinVersion()
+{
+	if (IsWindows8Point1OrGreater())
+		return "8.1+";
+	if (IsWindows8OrGreater())
+		return "8";
+	if (IsWindows7OrGreater())
+		return "7";
+	if (IsWindowsVistaOrGreater())
+		return "Vista";
+	if (IsWindowsXPOrGreater())
+		return "XP";
+	return "Undefined Windows Version";
+}
+
+int index(std::string sString, std::string sSubstring)
+{
+	int iIndex = -1;
+	for (int i = 0; i < sString.size(); ++i)
+	{
+		std::string sSubstringCandidate = "";
+		if (i < sString.size() - (sSubstring.size() - 1))
+			for (int j = 0; j < sSubstring.size(); ++j)
+				sSubstringCandidate += sString[i + j];
+		
+		if (sSubstringCandidate == sSubstring)
+		{
+			iIndex = i;
+			break;
+		}
+	}
+	return iIndex;
+}
+
+std::string replace(std::string sString, std::string sSubstring, std::string sReplacement)
+{
+	std::string sRes;
+	for (int i = 0; i < sString.size(); ++i)
+	{
+		std::string sSubstringCandidate = "";
+	
+		if (i < sString.size() - (sSubstring.size() - 1))
+			for (int j = 0; j < sSubstring.size(); ++j)
+				sSubstringCandidate += sString[i + j];
+		
+		if (sSubstringCandidate == sSubstring)
+		{
+			sRes += sReplacement;
+			if (sSubstring.size() == 1)
+				continue;
+			i += sSubstring.size();
+		}
+		sRes += sString[i];
+	}
+	return sRes;
+}
+
+std::vector<std::string> split(std::string sString, std::string sSeparator)
+{
+	std::vector<std::string> v;
+
+	std::string sPart;
+	for (int i = 0; i < sString.size(); ++i)
+	{
+		std::string sSeparatorCandidate = "";
+		if (i < sString.size() - (sSeparator.size() - 1))
+			for (int j = 0; j < sSeparator.size(); ++j)
+				sSeparatorCandidate += sString[i + j];
+		
+		if (sSeparatorCandidate == sSeparator)
+		{
+			v.push_back(sPart);
+			sPart = "";
+			i += sSeparator.size() - 1;
+		}
+		else
+			sPart += sString[i];
+	}
+
+	v.push_back(sPart);
+	return v;
+}
+
 char controlCharToChar(char cControlChar)
 {
 	switch (cControlChar)
 	{
-		case '\n':
-			return 'n';
-		case '\t':
-			return 't';
-		case '\a':
-			return 'a';
-		case '\0':
-			return '0';
-		case '\b':
-			return 'b';
-		case '\v':
-			return 'v';
-		case '\f':
-			return 'f';
-		case '\r':
-			return 'r';
-		case '\"':
-			return '"';
+		case '\n': return 'n';
+		case '\t': return 't';
+		case '\a': return 'a';
+		case '\0': return '0';
+		case '\b': return 'b';
+		case '\v': return 'v';
+		case '\f': return 'f';
+		case '\r': return 'r';
+		case '\"': return '"';
 	}
 }
 
-std::string repetitionInterpretation(std::string s)
+std::string collapseReps(std::string s)
 {
 	std::string sRes;
 
@@ -64,7 +259,7 @@ std::string repetitionInterpretation(std::string s)
 	return sRes;
 }
 
-std::string reverseRepetitionInterpretation(std::string s)
+std::string expandReps(std::string s)
 {
 	std::string sRes;
 	std::string sNumber;
@@ -84,71 +279,6 @@ std::string reverseRepetitionInterpretation(std::string s)
 	}
 
 	return sRes;
-}
-
-std::string encrypt(std::string sText, unsigned long ulKey, Separator separator)
-{
-	int iKeyLength = std::to_string(ulKey).size();
-
-	std::string sResult;
-
-	for (int i = 0; i < sText.size(); ++i)
-	{
-		int iCodeNumber = (int)sText[i];
-		int iStartFake = zer::rnd::randi(1, 9);
-		int iEndFake = zer::rnd::randi(0, 9);
-		
-		unsigned long ul = iCodeNumber * ulKey;
-		unsigned long ul2 = ul / iKeyLength;
-		unsigned long ul3 = (ul2 + (iEndFake * iKeyLength - iEndFake)) * iStartFake + ul % ul2;
-
-		std::string sRes = std::to_string(iStartFake) + std::to_string(ul3) + std::to_string(abs(iEndFake - iStartFake));
-		std::string sIntCode;
-
-		for (int j = 0; j < sRes.size(); ++j)
-		{
-			for (int k = 0; k < stoi(std::string(1, sRes[j])); ++k, sIntCode += separator.sDot);
-			sIntCode += separator.sIntCode;
-		}
-
-		sIntCode.erase(sIntCode.size() - 1, 1);
-
-		sResult += sIntCode + separator.sGlobalSep;
-	}
-
-	sResult.erase(sResult.size() - 1, 1);
-
-	return sResult;
-}
-
-std::string decrypt(std::string sCode, int iKey, Separator separator)
-{
-	int iKeyLength = std::to_string(iKey).size();
-
-	std::string sResult;
-	zer::row<std::string> rIntCodes = zer::str::split(sCode, separator.sGlobalSep);
-
-	for (int i = 0; i < rIntCodes.len(); ++i)
-	{
-		zer::row<std::string> rDots = zer::str::split(rIntCodes[i], separator.sIntCode);
-		
-		std::string sNumber;
-		for (int j = 0; j < rDots.len(); ++j)
-			sNumber += std::to_string(rDots[j].size());
-
-		int iStartFake = stoi(std::string(1, sNumber[0]));
-		int iEndFake = stoi(std::string(1, sNumber[sNumber.size() - 1])) + iStartFake;
-
-		sNumber.erase(0, 1);
-		sNumber.erase(sNumber.size() - 1, 1);
-		
-		double dNumber = stod(sNumber);
-		int iRes = round((((dNumber - (iEndFake * iKeyLength - iEndFake)) * iKeyLength) / iKey) / iStartFake);
-		
-		sResult += (char)iRes;
-	}
-
-	return sResult;
 }
 
 float getDistanceToFirstVerticalIntersection(int iPX, int iMX, float fCosAlpha, int iSqW)
