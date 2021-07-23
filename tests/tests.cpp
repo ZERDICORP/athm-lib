@@ -124,7 +124,5 @@ int main(int argc, char const *argv[])
 	test__isFolder();
 	test__isNumber();
 	test__inRange2D();
-
-	system("pause > nul");
 	return 0;
 }
