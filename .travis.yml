@@ -2,4 +2,4 @@ os: windows
 language: cpp
 compiler: g++
 install: skip
-script: g++ ./tests/tests.cpp -o ./tests/tests.exe -fconcepts
+script: g++ ./tests/tests.cpp -o ./tests/tests.exe -fconcepts && ./tests/tests.exe
