@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include "../src/athm.h"
 
 using namespace zer::athm;
@@ -171,5 +172,8 @@ int main(int argc, char const *argv[])
 	iCode += test__isNumber();
 	iCode += test__inRange2D();
 	
-	return iCode;
+	if (iCode != 0)
+		exit(EXIT_FAILURE);
+
+	return 0;
 }
