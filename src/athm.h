@@ -4,6 +4,7 @@
 #include <dirent.h>
 #include <ctime>
 #include <random>
+#include <map>
 #include <cassert>
 #include <cmath>
 #include <ws2tcpip.h>
