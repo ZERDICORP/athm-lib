@@ -1,2 +1,3 @@
 language: cpp
 compiler: gcc
+before_install: gcc athm.cpp -o main.exe -I"./"
