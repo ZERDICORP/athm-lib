@@ -1,13 +1,13 @@
 // athm.h
 
-#include <cmath>
-#include <ws2tcpip.h>
-#include <VersionHelpers.h>
 #include <cstring>
 #include <dirent.h>
 #include <ctime>
 #include <random>
 #include <cassert>
+#include <cmath>
+#include <ws2tcpip.h>
+#include <VersionHelpers.h>
 
 #define mPi 3.14159265359
 #define mDoublePi mPi * 2
@@ -30,6 +30,10 @@
 
 				inline Dist dda(int iPlayerY, int iPlayerX, float fAlpha, int iSqW);
 
+				template<typename TKey, typename TValue>
+				inline std::vector<TKey> keys(std::map<TKey, TValue> const& map);
+				template<typename TKey, typename TValue>
+				inline std::vector<TValue> values(std::map<TKey, TValue> const& map);
 				inline std::vector<std::string> listDir(std::string sDir);
 				inline std::vector<std::string> listFolders(std::string sDir);
 				inline std::vector<std::string> listFiles(std::string sDir);
@@ -44,7 +48,8 @@
 				inline std::string replace(std::string sString, std::string sSubstring, std::string sReplacement);
 
 				template <typename T>
-				inline int rand_choice(std::initializer_list<T> list, int iLen);
+				inline T rand_choice(std::initializer_list<T> list, int iLen);
+				
 				inline int rand_int(int iTo);
 				inline int rand_int(int iFrom, int iTo);
 				inline int find(auto start, auto end, auto callback);
@@ -61,6 +66,8 @@
 
 				inline double gravityForce(long double ldM1, long double ldM2, long double ldR) {return mG * ((ldM1 * ldM2) / pow(ldR, 2));}
 
+				template <typename T>
+				inline bool vectorHas(std::vector<T>& vec, T& item) {return std::find(vec.begin(), vec.end(), item) != vec.end();}
 				inline bool isFolder(std::string sPath);
 				inline bool isFile(std::string sPath) {return !isFolder(sPath);}
 				inline bool isInt(char chr);

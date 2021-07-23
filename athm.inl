@@ -1,5 +1,23 @@
 // athm.inl
 
+template<typename TKey, typename TValue>
+std::vector<TKey> keys(std::map<TKey, TValue> const& map)
+{
+	std::vector<TKey> vec;
+	for (auto const& element : map)
+		vec.push_back(element.first);
+	return vec;
+}
+
+template<typename TKey, typename TValue>
+std::vector<TValue> values(std::map<TKey, TValue> const& map)
+{
+	std::vector<TValue> vec;
+	for (auto const& element : map)
+		vec.push_back(element.second);
+	return vec;
+}
+
 void rand_init()
 {
 	srand(time(NULL));
@@ -17,7 +35,7 @@ int rand_int(int iFrom, int iTo)
 }
 
 template <typename T>
-int rand_choice(std::initializer_list<T> list, int iLen)
+T rand_choice(std::initializer_list<T> list, int iLen)
 {
 	int iRandomIndex = rand_int(iLen);
 	int iCount = 0;
