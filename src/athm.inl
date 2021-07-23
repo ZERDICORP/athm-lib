@@ -48,14 +48,6 @@ T rand_choice(std::initializer_list<T> list, int iLen)
 
 }
 
-int find(auto start, auto end, auto callback)
-{
-	for (auto ptr = start; ptr != end; ++ptr)
-		if (callback(*ptr))
-			return static_cast<int>(ptr - start);
-	return -1;
-}
-
 void sort(auto start, auto end, auto callback)
 {
 	for (auto ptr1 = start; ptr1 != end; ++ptr1)
@@ -297,32 +289,6 @@ std::string expandReps(std::string s)
 	}
 
 	return sRes;
-}
-
-float getDistanceToFirstVerticalIntersection(int iPX, int iMX, float fCosAlpha, int iSqW)
-{
-	int iAX = fCosAlpha >= 0 ? iMX + iSqW : iMX; // if we look right, when x > 0
-	return float((iAX - iPX) / fCosAlpha);
-}
-
-float getDistanceToFirstHorizontalIntersection(int iPY, int iMY, float fSinAlpha, int iSqW)
-{
-	int iAY = fSinAlpha >= 0 ? iMY + iSqW : iMY; // if we look down, when y > 0
-	return float((iAY - iPY) / fSinAlpha);
-}
-
-Dist dda(int iPlayerY, int iPlayerX, float fAlpha, int iSqW)
-{
-	float fSinAlpha = sin(fAlpha);
-	float fCosAlpha = cos(fAlpha);
-
-	int iMY = int(iPlayerY / iSqW) * iSqW;
-	int iMX = int(iPlayerX / iSqW) * iSqW;
-
-	float fFirstHorizontalIntersection = getDistanceToFirstHorizontalIntersection(iPlayerY, iMY, fSinAlpha, iSqW);
-	float fFirstVerticalIntersection = getDistanceToFirstVerticalIntersection(iPlayerX, iMX, fCosAlpha, iSqW);
-
-	return {fFirstHorizontalIntersection, fFirstVerticalIntersection};
 }
 
 bool isInt(char chr)

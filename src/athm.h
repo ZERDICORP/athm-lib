@@ -6,6 +6,7 @@
 #include <random>
 #include <map>
 #include <cassert>
+#include <algorithm>
 #include <cmath>
 #include <ws2tcpip.h>
 #include <VersionHelpers.h>
@@ -20,16 +21,8 @@
 		{
 			namespace athm
 			{
-				struct Dist
-				{
-					float fHorizontal;
-					float fVertical;
-				};
-
 				inline void rand_init();
 				inline void sort(auto start, auto end, auto callback);
-
-				inline Dist dda(int iPlayerY, int iPlayerX, float fAlpha, int iSqW);
 
 				template<typename TKey, typename TValue>
 				inline std::vector<TKey> keys(std::map<TKey, TValue> const& map);
@@ -53,22 +46,19 @@
 				
 				inline int rand_int(int iTo);
 				inline int rand_int(int iFrom, int iTo);
-				inline int find(auto start, auto end, auto callback);
 				inline int index(std::string sString, std::string sSubstring);
 
 				inline float rand_float() {return (float)rand_int(10000) / (float)10000;}
-				inline float getDistanceToFirstVerticalIntersection(int iPX, int iMX, float fCosAlpha, int iSqW);
-				inline float getDistanceToFirstHorizontalIntersection(int iPY, int iMY, float fSinAlpha, int iSqW);
 				inline float toRadians(float fDegree) {return fDegree * (mPi / 180);}
 				inline float toDegrees(float fRadians) {return fRadians / (mPi / 180);}
-				inline float getAngleToPoint(float fY1, float fX1, float fY2, float fX2) {return toRadians(180 / mPi * atan2f(fX1 - fX2, fY1 - fY2)) + toRadians(90);}
-				inline float getHypot(float iFromY, float iFromX, float iToY, float iToX) {return sqrt(pow(abs(iFromY - iToY), 2) + pow(abs(iFromX - iToX), 2));}
+				inline float getAngleBetweenPoints(float fY1, float fX1, float fY2, float fX2) {return toRadians(180 / mPi * atan2f(fX1 - fX2, fY1 - fY2)) + toRadians(90);}
+				inline float getDistance2D(float fY1, float fX1, float fY2, float fX2) {return sqrt(pow(abs(fY1 - fY2), 2) + pow(abs(fX1 - fX2), 2));}
 				inline float sign(float f) {return f / abs(f);}
 
-				inline double gravityForce(long double ldM1, long double ldM2, long double ldR) {return mG * ((ldM1 * ldM2) / pow(ldR, 2));}
+				inline double gravityForce(double dM1, double dM2, double dR) {return mG * ((dM1 * dM2) / pow(dR, 2));}
 
 				template <typename T>
-				inline bool vectorHas(std::vector<T>& vec, T& item) {return std::find(vec.begin(), vec.end(), item) != vec.end();}
+				inline bool vectorHas(std::vector<T>& vec, const T& item) {return std::find(vec.begin(), vec.end(), item) != vec.end();}
 				inline bool isFolder(std::string sPath);
 				inline bool isFile(std::string sPath) {return !isFolder(sPath);}
 				inline bool isInt(char chr);

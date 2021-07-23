@@ -1,3 +1,5 @@
+os: windows
 language: cpp
 compiler: g++
-before_install: g++ ./tests/tests.cpp -o ./tests/main.exe -I"./src"
+install: skip
+script: g++ ./tests/tests.cpp -o ./tests/main.exe -I"./src" -fconcepts
