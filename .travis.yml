@@ -1,9 +1,8 @@
 os: windows
 language: cpp
 compiler: g++
-sudo: required
-install: sudo apt-get install wine
+install: skip
 script:
   - cd tests
   - g++ tests.cpp -o tests.exe -fconcepts
-  - wine tests.exe
+  - tests.exe
