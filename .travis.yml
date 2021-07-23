@@ -9,5 +9,5 @@ script:
   - cd ..
   - cd ..
   - dir
-  - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/"
+  - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
   - start /wait runner.exe
