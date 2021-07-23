@@ -3,6 +3,10 @@ language: cpp
 compiler: g++
 install: skip
 script:
-  - cd tests
-  - g++ tests.cpp -o tests.exe -fconcepts
-  - start /wait tests.exe
+  - cd ./tests
+  - cd ./cxxtest/bin
+  - cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
+  - cd ..
+  - cd ..
+  - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/"
+  - call runner.exe

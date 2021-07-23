@@ -76,12 +76,23 @@ std::string getCurrentDateTime(std::string format = "%d.%m.%Y %H:%M:%S")
 	return buffer;
 }
 
+bool exists(std::string sPath)
+{
+	struct stat info;
+
+	return stat(sPath.c_str(), &info) == 0;
+}
+
 bool isFolder(std::string sPath)
 {
-	DWORD attrib = GetFileAttributes(sPath.c_str());
-	if ((attrib & FILE_ATTRIBUTE_DIRECTORY) != 0)
-		return true;
-	return false;
+	if (!exists(sPath))
+		return 0;
+
+	struct stat info;
+	
+	stat(sPath.c_str(), &info);
+
+	return info.st_mode & S_IFDIR;
 }
 
 std::vector<std::string> listDir(std::string sDir)
