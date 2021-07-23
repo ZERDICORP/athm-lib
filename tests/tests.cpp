@@ -3,7 +3,7 @@
 
 using namespace zer::athm;
 
-void test__sort()
+int test__sort()
 {
 	std::vector<int> vec({3, 4, 2, 1, 5});
 
@@ -11,10 +11,12 @@ void test__sort()
 		return i1 < i2;
 	});
 
-	assert(vec == std::vector<int>({1, 2, 3, 4, 5}));
+	if (!(vec == std::vector<int>({1, 2, 3, 4, 5})))
+		return 1;
+	return 0;
 }
 
-void test__keys__values()
+int test__keys__values()
 {
 	std::map<int, int> m({
 		{1, 10},
@@ -22,107 +24,152 @@ void test__keys__values()
 		{3, 30}
 	});
 
-	assert(keys(m) == std::vector<int>({1, 2, 3}));
-	assert(values(m) == std::vector<int>({10, 20, 30}));
+	
+	if (!(keys(m) == std::vector<int>({1, 2, 3})))
+		return 1;
+	if (!(values(m) == std::vector<int>({10, 20, 30})))
+		return 1;
+	return 0;
 }
 
-void test__listDir()
+int test__listDir()
+{	
+	if (!(listDir("./") == std::vector<std::string>({".", "..", "tests.cpp", "tests.exe"})))
+		return 1;
+	return 0;
+}
+
+int test__split()
 {
-	assert(listDir("./") == std::vector<std::string>({".", "..", "tests.cpp", "tests.exe"}));
+	if (!(split("1, 2, 3", ", ") == std::vector<std::string>({"1", "2", "3"})))
+		return 1;
+	return 0;
 }
 
-void test__split()
+int test__collapseReps()
 {
-	assert(split("1, 2, 3", ", ") == std::vector<std::string>({"1", "2", "3"}));
+	if (!(collapseReps("++++-----") == "4+5-"))
+		return 1;
+	return 0;
 }
 
-void test__collapseReps()
+int test__expandReps()
 {
-	assert(collapseReps("++++-----") == "4+5-");
+	if (!(expandReps("4+5-") == "++++-----"))
+		return 1;
+	return 0;
 }
 
-void test__expandReps()
+int test__replace()
 {
-	assert(expandReps("4+5-") == "++++-----");
+	
+	if (!(replace("12335", "33", "34") == "12345"))
+		return 1;
+	return 0;
 }
 
-void test__replace()
+int test__index()
 {
-	assert(replace("12335", "33", "34") == "12345");
+	if (!(index("12345", "3") == 2))
+		return 1;
+	return 0;
 }
 
-void test__index()
+int test__toRadians()
 {
-	assert(index("12345", "3") == 2);
+	if (!(int(toRadians(90) * 10000.0 + 0.5) == 15708))
+		return 1;
+	return 0;
 }
 
-void test__toRadians()
+int test__getAngleBetweenPoints()
 {
-	assert(int(toRadians(90) * 10000.0 + 0.5) == 15708);
+	if (!(int(abs(toDegrees(getAngleBetweenPoints(0, 0, 10, 10))) + 0.5) == 45))
+		return 1;
+	return 0;
 }
 
-void test__getAngleBetweenPoints()
+int test__getDistance2D()
 {
-	assert(int(abs(toDegrees(getAngleBetweenPoints(0, 0, 10, 10))) + 0.5) == 45);
+	if (!((int)getDistance2D(0, 0, 10, 10) == 14))
+		return 1;
+	return 0;
 }
 
-void test__getDistance2D()
+int test__sign()
 {
-	assert((int)getDistance2D(0, 0, 10, 10) == 14);
+	if (!(sign(3) == 1))
+		return 1;
+	if (!(sign(-3) == -1))
+		return 1;
+	return 0;
 }
 
-void test__sign()
-{
-	assert(sign(3) == 1);
-	assert(sign(-3) == -1);
-}
-
-void test__vectorHas()
+int test__vectorHas()
 {
 	std::vector<int> vec({1, 2, 3});
-
-	assert(vectorHas(vec, 1) == true);
-	assert(vectorHas(vec, 5) == false);
+	
+	if (!(vectorHas(vec, 1) == true))
+		return 1;
+	if (!(vectorHas(vec, 5) == false))
+		return 1;
+	return 0;
 }
 
-void test__isFolder()
+int test__isFolder()
 {
-	assert(isFolder("../tests") == true);
-	assert(isFolder("./tests.cpp") == false);
+	if (!(isFolder("../tests") == true))
+		return 1;
+	if (!(isFolder("./tests.cpp") == false))
+		return 1;
+	return 0;
 }
 
-void test__isNumber()
+int test__isNumber()
 {
-	assert(isNumber("3") == true);
-	assert(isNumber("3a") == false);
-	assert(isNumber("03") == false);
-	assert(isNumber("3.14") == true);
-	assert(isNumber(".14") == true);
-	assert(isNumber("14.") == true);
+	if (!(isNumber("3") == true))
+		return 1;	
+	if (!(isNumber("3a") == false))
+		return 1;
+	if (!(isNumber("03") == false))
+		return 1;
+	if (!(isNumber("3.14") == true))
+		return 1;
+	if (!(isNumber(".14") == true))
+		return 1;
+	if (!(isNumber("14.") == true))
+		return 1;
+	return 0;
 }
 
-void test__inRange2D()
-{
-	assert(inRange2D(10, 10, 5, 5) == true);
-	assert(inRange2D(10, 10, -1, 5) == false);
+int test__inRange2D()
+{	
+	if (!(inRange2D(10, 10, 5, 5) == true))
+		return 1;
+	if (!(inRange2D(10, 10, -1, 5) == false))
+		return 1;
+	return 0;
 }
 
 int main(int argc, char const *argv[])
 {
-	test__sort();
-	test__keys__values();
-	test__listDir();
-	test__split();
-	test__collapseReps();
-	test__expandReps();
-	test__replace();
-	test__index();
-	test__toRadians();
-	test__getAngleBetweenPoints();
-	test__getDistance2D();
-	test__vectorHas();
-	test__isFolder();
-	test__isNumber();
-	test__inRange2D();
-	return 0;
+	int iCode = 0;
+
+	iCode += test__sort();
+	iCode += test__keys__values();
+	iCode += test__listDir();
+	iCode += test__split();
+	iCode += test__collapseReps();
+	iCode += test__expandReps();
+	iCode += test__replace();
+	iCode += test__index();
+	iCode += test__toRadians();
+	iCode += test__getAngleBetweenPoints();
+	iCode += test__getDistance2D();
+	iCode += test__vectorHas();
+	iCode += test__isFolder();
+	iCode += test__isNumber();
+	iCode += test__inRange2D();
+	
+	return iCode;
 }
