@@ -5,4 +5,4 @@ install: skip
 script:
   - cd tests
   - g++ tests.cpp -o tests.exe -fconcepts
-  - start tests.exe
+  - start /wait tests.exe
