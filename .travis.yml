@@ -1,4 +1,2 @@
 language: cpp
-rvm:
-- 7.3.0
-- gcc
+compiler: gcc
