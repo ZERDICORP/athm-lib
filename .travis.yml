@@ -10,3 +10,5 @@ script:
   - set -e
   - dir
   - ./runner.exe
+sudo: false
+dist: trusty
