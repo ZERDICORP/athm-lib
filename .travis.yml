@@ -11,5 +11,5 @@ script:
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
   - cd ..
   - cd ..
-  - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
+  - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/"
   - wine ./runner.exe
