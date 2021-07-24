@@ -142,20 +142,22 @@ std::vector<std::string> listFiles(std::string sDir)
 	return list;
 }
 
-std::string getWinVersion()
-{
-	if (IsWindows8Point1OrGreater())
-		return "8.1+";
-	if (IsWindows8OrGreater())
-		return "8";
-	if (IsWindows7OrGreater())
-		return "7";
-	if (IsWindowsVistaOrGreater())
-		return "Vista";
-	if (IsWindowsXPOrGreater())
-		return "XP";
-	return "Undefined Windows Version";
-}
+#ifdef _WIN32
+	std::string getWinVersion()
+	{
+		if (IsWindows8Point1OrGreater())
+			return "8.1+";
+		if (IsWindows8OrGreater())
+			return "8";
+		if (IsWindows7OrGreater())
+			return "7";
+		if (IsWindowsVistaOrGreater())
+			return "Vista";
+		if (IsWindowsXPOrGreater())
+			return "XP";
+		return "Undefined Windows Version";
+	}
+#endif
 
 int index(std::string sString, std::string sSubstring)
 {

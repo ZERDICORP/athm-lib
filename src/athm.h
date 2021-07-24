@@ -1,5 +1,8 @@
 // athm.h
 
+#ifdef _WIN32
+	#include <ws2tcpip.h>
+#endif
 #include <cstring>
 #include <dirent.h>
 #include <ctime>
@@ -8,7 +11,6 @@
 #include <cassert>
 #include <algorithm>
 #include <cmath>
-#include <ws2tcpip.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <VersionHelpers.h>
@@ -38,7 +40,9 @@
 				inline char controlCharToChar(char cControlChar);
 
 				inline std::string getCurrentDateTime(std::string format);
-				inline std::string getWinVersion();
+				#ifdef _WIN32
+					inline std::string getWinVersion();
+				#endif
 				inline std::string collapseReps(std::string s);
 				inline std::string expandReps(std::string s);
 				inline std::string replace(std::string sString, std::string sSubstring, std::string sReplacement);
