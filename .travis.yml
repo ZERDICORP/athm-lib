@@ -1,12 +1,16 @@
-os: windows
+os: linux
 language: cpp
 compiler: g++
 install: skip
+sudo: required
 script:
+  - set -e
+  - sudo apt-get install wine
+  - sudo apt-get install -y mingw-w64
   - cd ./tests
   - cd ./cxxtest/bin
-  - cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
+  - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
   - cd ..
   - cd ..
-  - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/"
-  - call runner.exe
+  - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -std=c++11
+  - wine ./runner.exe
