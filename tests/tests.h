@@ -62,8 +62,7 @@ class TestSuite : public CxxTest::TestSuite
 
 		void test__getAngleBetweenPoints(void)
 		{
-			std::cout << "\n!!! " << int(abs(toDegrees(getAngleBetweenPoints(0, 0, 10, 10))) + 0.5) << " !!!" << std::endl;
-			TS_ASSERT(int(abs(toDegrees(getAngleBetweenPoints(0, 0, 10, 10))) + 0.5) == 45);
+			TS_ASSERT(round(toDegrees(getAngleBetweenPoints(0, 0, 10, 10))) == -45);
 		}
 
 		void test__getDistance2D(void)
