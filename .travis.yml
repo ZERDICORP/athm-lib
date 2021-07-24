@@ -11,4 +11,4 @@ install:
   - dir
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
 script:
-  - & "./runner.exe"
+  - & './runner.exe'
