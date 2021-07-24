@@ -11,4 +11,4 @@ script:
   - cd ..
   - dir
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
-  - start /wait cmd /c runner.exe
+  - ./runner.exe
