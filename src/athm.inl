@@ -113,7 +113,6 @@ std::vector<std::string> listDir(std::string sDir)
 	::closedir(dp);
 
 	delete entry;
-	delete dp;
 
 	return list;
 }
