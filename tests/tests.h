@@ -32,7 +32,7 @@ class TestSuite : public CxxTest::TestSuite
 
 		void test__listDir(void)
 		{
-			std::vector<string> vec = listDir("./");
+			std::vector<std::string> vec = listDir("./");
 			for (int i = 0; i < vec.size(); ++i)
 			{
 				std::cout << vec[i] << " ";
