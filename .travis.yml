@@ -5,9 +5,9 @@ install: skip
 script:
   - cd ./tests
   - cd ./cxxtest/bin
-  - start /wait cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
+  - start /wait cmd /c cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
   - cd ..
   - cd ..
   - dir
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
-  - start /wait runner.exe
+  - start /wait cmd /c runner.exe
