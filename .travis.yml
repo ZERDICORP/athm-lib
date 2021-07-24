@@ -11,6 +11,7 @@ script:
   - echo "deb https://dl.winehq.org/wine-builds/ubuntu/ xenial main" >> /etc/apt/sources.list
   - sudo apt update
   - sudo apt install --install-recommends winehq-stable
+  - winecfg
   - cd ./tests
   - cd ./cxxtest/bin
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
