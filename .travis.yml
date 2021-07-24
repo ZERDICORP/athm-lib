@@ -1,9 +1,9 @@
 os: windows
-language: shell
 install:
   - cd ./tests/cxxtest/bin
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
   - cd .. && cd ..
   - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
   - dir
+script:
   - ./runner.exe
