@@ -1,19 +1,14 @@
-os: linux
+os: windows
 language: cpp
 compiler: g++
 install: skip
-sudo: required
 script:
   - set -e
-  - wget -nc https://dl.winehq.org/wine-builds/winehq.key
-  - sudo gpg -o /etc/apt/trusted.gpg.d/winehq.key.gpg --dearmor winehq.key
-  - sudo apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ xenial main'
-  - sudo apt update
-  - sudo apt install --install-recommends winehq-stable
   - cd ./tests
   - cd ./cxxtest/bin
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
   - cd ..
   - cd ..
-  - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -std=c++11 -std=c++14
-  - wine ./runner.exe
+  - dir
+  - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/"
+  - ./runner.exe
