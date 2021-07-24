@@ -1,6 +1,5 @@
 os: windows
-language: cpp
-compiler: g++
+language: shell
 install:
   - cd ./tests/cxxtest/bin
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
@@ -8,4 +7,4 @@ install:
 script:
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
   - ls -l ./
-  - runner.exe
+  - ./runner.exe
