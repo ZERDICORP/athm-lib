@@ -1,8 +1,7 @@
 os: windows
 language: cpp
 compiler: g++
-install: skip
-script:
+install:
   - set -e
   - cd ./tests
   - cd ./cxxtest/bin
@@ -11,4 +10,5 @@ script:
   - cd ..
   - dir
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
+script:
   - ./runner.exe
