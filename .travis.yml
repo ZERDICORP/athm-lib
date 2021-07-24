@@ -1,14 +1,15 @@
-os: windows
+os: linux
 language: cpp
 compiler: g++
 install: skip
+sudo: required
 script:
   - set -e
+  - sudo apt-get install wine
   - cd ./tests
   - cd ./cxxtest/bin
-  - start cxxtestgen --error-printer -o runner.cpp ../../tests.h
+  - wine cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
   - cd ..
   - cd ..
-  - move ./cxxtest/bin/runner.cpp ./
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
-  - start /wait cmd /c runner.exe
+  - wine runner.exe
