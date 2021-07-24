@@ -7,4 +7,5 @@ install:
   - cd .. && cd ..
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
 script:
-  - cmd /c runner.exe
+  - echo %cd%
+  - "& 'runner.exe'"
