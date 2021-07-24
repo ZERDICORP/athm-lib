@@ -2,6 +2,7 @@
 
 #ifdef _WIN32
 	#include <ws2tcpip.h>
+	#include <VersionHelpers.h>
 #endif
 #include <cstring>
 #include <dirent.h>
@@ -13,7 +14,6 @@
 #include <cmath>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <VersionHelpers.h>
 
 #define mPi 3.14159265359
 #define mDoublePi mPi * 2
