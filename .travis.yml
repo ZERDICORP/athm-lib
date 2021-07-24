@@ -5,7 +5,10 @@ install: skip
 sudo: required
 script:
   - set -e
-  - lsb_release
+  - cat /etc/os-release
+  - lsb_release -a
+  - hostnamectl
+  - uname -r
   - sudo dpkg --add-architecture i386
   - wget -nc https://dl.winehq.org/wine-builds/winehq.key
   - sudo apt-key add winehq.key
