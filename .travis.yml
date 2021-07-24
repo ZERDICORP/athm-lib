@@ -7,5 +7,4 @@ install:
 script:
   - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
 after_script:
-  - alias runner="./runner.exe"
-  - runner
+  - /c/Users/travis/.travis/functions/runner.exe
