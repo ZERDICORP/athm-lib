@@ -32,7 +32,7 @@ class TestSuite : public CxxTest::TestSuite
 
 		void test__listDir(void)
 		{
-			TS_ASSERT(listDir("./") == std::vector<std::string>({".", "..", "cxxtest", "runner.cpp", "runner.exe", "tests.h"}));
+			TS_ASSERT(listDir("./") == std::vector<std::string>({"cxxtest", "runner.cpp", "runner.exe", "tests.h"}));
 		}
 
 		void test__split(void)
