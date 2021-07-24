@@ -7,4 +7,4 @@ install:
 script:
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
   - ls -l ./
-  - ./runner.exe
+  - chmod a+x runner.exe
