@@ -7,4 +7,5 @@ install:
 script:
   - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
   - dir
+  - dumpbin /headers ./runner.exe
   - ./runner.exe
