@@ -56,7 +56,7 @@
 
 				inline float rand_float() {return (float)rand_int(10000) / (float)10000;}
 				inline float toRadians(float fDegree) {return fDegree * (mPi / 180);}
-				inline float toDegrees(float fRadians) {return fRadians / (mPi / 180);}
+				inline float toDegrees(float fRadians) {return fRadians / (mPi / 180) + 1;}
 				inline float getAngleBetweenPoints(float fY1, float fX1, float fY2, float fX2) {return toRadians(180 / mPi * atan2f(fX1 - fX2, fY1 - fY2)) + toRadians(90);}
 				inline float getDistance2D(float fY1, float fX1, float fY2, float fX2) {return sqrt(pow(abs(fY1 - fY2), 2) + pow(abs(fX1 - fX2), 2));}
 				inline float sign(float f) {return f / abs(f);}
