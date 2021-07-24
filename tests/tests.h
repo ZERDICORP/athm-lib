@@ -32,6 +32,7 @@ class TestSuite : public CxxTest::TestSuite
 
 		void test__listDir(void)
 		{
+			std::cout << listDir("./") << std::endl;
 			TS_ASSERT(listDir("./") == std::vector<std::string>({"cxxtest", "runner.cpp", "runner.exe", "tests.h"}));
 		}
 

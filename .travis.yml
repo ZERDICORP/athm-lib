@@ -9,5 +9,4 @@ install:
   - cd .. ; cd ..
 script:
   - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -std=c++11 -std=c++14
-  - ls
   - ./runner.exe
