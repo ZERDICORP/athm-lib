@@ -30,16 +30,6 @@ class TestSuite : public CxxTest::TestSuite
 			TS_ASSERT(values(m) == std::vector<int>({10, 20, 30}));
 		}
 
-		void test__listDir(void)
-		{
-			std::vector<std::string> vec = listDir("./");
-			for (int i = 0; i < vec.size(); ++i)
-			{
-				std::cout << vec[i] << " ";
-			}
-			TS_ASSERT(listDir("./") == std::vector<std::string>({"cxxtest", "runner.cpp", "runner.exe", "tests.h"}));
-		}
-
 		void test__split(void)
 		{
 			TS_ASSERT(split("1, 2, 3", ", ") == std::vector<std::string>({"1", "2", "3"}));
