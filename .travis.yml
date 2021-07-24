@@ -6,5 +6,5 @@ install:
   - cd .. && cd ..
 script:
   - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
-after_script:
+  - dir
   - ./runner.exe
