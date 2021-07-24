@@ -2,7 +2,6 @@ os: windows
 language: cpp
 compiler: g++
 install:
-  - set -e
   - cd ./tests
   - cd ./cxxtest/bin
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
