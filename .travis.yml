@@ -6,4 +6,6 @@ install:
   - cd .. && cd ..
 script:
   - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
-  - ./runner
+after_script:
+  - alias runner="./runner.exe"
+  - runner
