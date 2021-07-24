@@ -6,6 +6,7 @@ install:
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
   - cd .. && cd ..
   - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
-  - dir
 script:
+  - set -e
+  - dir
   - ./runner.exe
