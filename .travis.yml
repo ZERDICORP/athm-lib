@@ -1,6 +1,7 @@
 os: windows
 language: cpp
 compiler: g++
+powershell: 
 install:
   - cd ./tests
   - cd ./cxxtest/bin
@@ -10,4 +11,4 @@ install:
   - dir
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
 script:
-  - ./runner.exe
+  - & './runner.exe'
