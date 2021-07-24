@@ -1,14 +1,12 @@
-os: windows
+os: linux
 language: cpp
 compiler: g++
+sudo: required
 install:
+  - set -e
   - cd ./tests/cxxtest/bin
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
-  - cd .. && cd ..
-  - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
+  - cd .. ; cd ..
 script:
-  - set -e
-  - dir
+  - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -std=c++11 -std=c++14
   - ./runner.exe
-sudo: false
-dist: trusty
