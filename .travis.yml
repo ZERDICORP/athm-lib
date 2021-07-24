@@ -4,12 +4,9 @@ compiler: g++
 sudo: required
 install:
   - set -e
-  - sudo apt update
-  - sudo apt install valgrind
-  - valgrind --version
   - cd ./tests/cxxtest/bin
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
   - cd .. ; cd ..
 script:
   - g++ ./runner.cpp -o ./runner.exe -I"./cxxtest/" -I"../src/" -std=c++11 -std=c++14
-  - valgrind --leak-check=full --show-leak-kinds=all ./runner.exe
+  - ./runner.exe
