@@ -6,5 +6,4 @@ install:
   - cd .. && cd ..
 script:
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
-  - ls -l ./
-  - RunWait runner.exe
+  - runner
