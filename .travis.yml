@@ -8,7 +8,7 @@ script:
   - sudo apt-get install wine
   - cd ./tests
   - cd ./cxxtest/bin
-  - wine ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
+  - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
   - cd ..
   - cd ..
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
