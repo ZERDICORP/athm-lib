@@ -3,12 +3,9 @@ language: cpp
 compiler: g++
 powershell: 
 install:
-  - cd ./tests
-  - cd ./cxxtest/bin
+  - cd ./tests/cxxtest/bin
   - python ./cxxtestgen --error-printer -o ../../runner.cpp ../../tests.h
-  - cd ..
-  - cd ..
-  - dir
+  - cd .. && cd ..
   - g++ runner.cpp -o runner.exe -I"./cxxtest/" -I"../src/" -fconcepts
 script:
   - & "./runner.exe"
