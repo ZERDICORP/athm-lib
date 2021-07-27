@@ -1,3 +1,3 @@
-# zer::athm
+# zer::athm v1 (current)
 
-[![Build Status](https://travis-ci.com/ZERDICORP/athm-lib.svg?branch=master)](https://travis-ci.com/ZERDICORP/athm-lib)
+[![Build Status](https://travis-ci.com/ZERDICORP/athm-lib.svg?branch=v1)](https://travis-ci.com/ZERDICORP/athm-lib)
