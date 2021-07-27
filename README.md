@@ -1,3 +1,4 @@
-# zer::athm
+# :full_moon_with_face:  zer::athm
 
-[![Build Status](https://travis-ci.com/ZERDICORP/athm-lib.svg?branch=master)](https://travis-ci.com/ZERDICORP/athm-lib)
+### :scroll:  Versions:
+- :godmode: [v2](https://github.com/ZERDICORP/athm-lib/tree/v1) (current)
