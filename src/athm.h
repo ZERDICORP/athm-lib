@@ -2,7 +2,6 @@
 
 #ifdef _WIN32
 	#include <ws2tcpip.h>
-	#include <VersionHelpers.h>
 #endif
 #include <cstring>
 #include <dirent.h>
@@ -26,7 +25,8 @@
 			namespace athm
 			{
 				inline void rand_init();
-				inline void sort(auto start, auto end, auto callback);
+				template<typename TPointer, typename TCallback>
+				inline void sort(TPointer start, TPointer end, TCallback callback);
 
 				template<typename TKey, typename TValue>
 				inline std::vector<TKey> keys(std::map<TKey, TValue> const& map);
@@ -40,9 +40,6 @@
 				inline char controlCharToChar(char cControlChar);
 
 				inline std::string getCurrentDateTime(std::string format);
-				#ifdef _WIN32
-					inline std::string getWinVersion();
-				#endif
 				inline std::string collapseReps(std::string s);
 				inline std::string expandReps(std::string s);
 				inline std::string replace(std::string sString, std::string sSubstring, std::string sReplacement);

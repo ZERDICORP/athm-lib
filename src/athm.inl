@@ -1,5 +1,22 @@
 // athm.inl
 
+template<typename TPointer, typename TCallback>
+void sort(TPointer start, TPointer end, TCallback callback)
+{
+	for (TPointer ptr1 = start; ptr1 != end; ++ptr1)
+	{
+		for (TPointer ptr2 = start; ptr2 != end; ++ptr2)
+		{
+			if (callback(*ptr1, *ptr2))
+				{
+					TPointer temp = *ptr1;
+					*ptr1 = *ptr2;
+					*ptr2 = temp;
+				}
+		}
+	}
+}
+
 template<typename TKey, typename TValue>
 std::vector<TKey> keys(std::map<TKey, TValue> const& map)
 {
@@ -46,22 +63,6 @@ T rand_choice(std::initializer_list<T> list, int iLen)
 		iCount++;
 	}
 
-}
-
-void sort(auto start, auto end, auto callback)
-{
-	for (auto ptr1 = start; ptr1 != end; ++ptr1)
-	{
-		for (auto ptr2 = start; ptr2 != end; ++ptr2)
-		{
-			if (callback(*ptr1, *ptr2))
-				{
-					auto temp = *ptr1;
-					*ptr1 = *ptr2;
-					*ptr2 = temp;
-				}
-		}
-	}
 }
 
 std::string getCurrentDateTime(std::string format = "%d.%m.%Y %H:%M:%S")
@@ -140,23 +141,6 @@ std::vector<std::string> listFiles(std::string sDir)
 		}
 	return list;
 }
-
-#ifdef _WIN32
-	std::string getWinVersion()
-	{
-		if (IsWindows8Point1OrGreater())
-			return "8.1+";
-		if (IsWindows8OrGreater())
-			return "8";
-		if (IsWindows7OrGreater())
-			return "7";
-		if (IsWindowsVistaOrGreater())
-			return "Vista";
-		if (IsWindowsXPOrGreater())
-			return "XP";
-		return "Undefined Windows Version";
-	}
-#endif
 
 int index(std::string sString, std::string sSubstring)
 {
