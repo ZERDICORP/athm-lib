@@ -224,6 +224,8 @@ char controlCharToChar(char cControlChar)
 		case '\r': return 'r';
 		case '\"': return '"';
 	}
+
+	return ' ';
 }
 
 std::string collapseReps(std::string s)
