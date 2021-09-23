@@ -1,15 +1,14 @@
 // athm.inl
 
-template<typename TPointer, typename TCallback>
-void sort(TPointer start, TPointer end, TCallback callback)
+void sort(auto start, auto end, auto callback)
 {
-	for (TPointer ptr1 = start; ptr1 != end; ++ptr1)
+	for (auto ptr1 = start; ptr1 != end; ++ptr1)
 	{
-		for (TPointer ptr2 = start; ptr2 != end; ++ptr2)
+		for (auto ptr2 = start; ptr2 != end; ++ptr2)
 		{
 			if (callback(*ptr1, *ptr2))
 				{
-					TPointer temp = *ptr1;
+					auto temp = *ptr1;
 					*ptr1 = *ptr2;
 					*ptr2 = temp;
 				}

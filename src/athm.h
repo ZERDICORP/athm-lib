@@ -25,8 +25,7 @@
 			namespace athm
 			{
 				inline void rand_init();
-				template<typename TPointer, typename TCallback>
-				inline void sort(TPointer start, TPointer end, TCallback callback);
+				inline void sort(auto start, auto end, auto callback);
 
 				template<typename TKey, typename TValue>
 				inline std::vector<TKey> keys(std::map<TKey, TValue> const& map);
