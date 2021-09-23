@@ -11,7 +11,7 @@ class TestSuite : public CxxTest::TestSuite
 		{
 			std::vector<int> vec({3, 4, 2, 1, 5});
 
-			sort(vec.begin(), vec.end(), [](int& i1, int& i2){
+			sort<int>(vec.begin(), vec.end(), [](int& i1, int& i2){
 				return i1 < i2;
 			});
 
